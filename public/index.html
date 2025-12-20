@@ -1,0 +1,177 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>EcoVerse Quest</title>
+	<link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#0f766e">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="/public/css/styles.css">
+	<script src="https://unpkg.com/three@0.159.0/build/three.min.js"></script>
+	<style>
+		:root{--accent:#10b981;--muted:#6b7280}
+		html,body,#app{height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+		.glass{background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.5));backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(2,6,23,0.08)}
+		.badge-pill{padding:6px 10px;background:linear-gradient(90deg,#fef3c7,#fde68a);border-radius:999px;color:#854d0e;font-weight:600;font-size:0.8rem}
+		.card-enter{opacity:0;transform:translateY(10px);transition:all 420ms cubic-bezier(.2,.9,.3,1)}
+		.card-enter.show{opacity:1;transform:none}
+		.avatar{width:40px;height:40px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:white;font-weight:700}
+		.toast-item{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,#0f766e,#06b6d4);color:white;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+		.logo-grad{background:linear-gradient(135deg,#06b6d4,#059669);}
+		.sparkle{filter:drop-shadow(0 6px 18px rgba(16,185,129,0.12));}
+	</style>
+</head>
+<body class="bg-gradient-to-b from-sky-50 to-emerald-50 text-slate-800">
+	<div id="app" class="min-h-screen container mx-auto p-6">
+		<header class="flex items-center justify-between mb-6 relative">
+			<div class="flex items-center gap-3">
+				<div class="w-12 h-12 rounded-full logo-grad text-white flex items-center justify-center text-xl font-bold sparkle">EV</div>
+				<div>
+					<h1 class="text-2xl font-extrabold">EcoVerse Quest</h1>
+					<p class="text-sm text-slate-600">Learn, act, and earn badges for a greener life.</p>
+				</div>
+			</div>
+			<div class="flex items-center gap-3">
+				<button id="btnAuth" class="px-3 py-2 bg-white text-slate-800 rounded shadow">Log in</button>
+				<button id="btnLogout" class="px-3 py-2 bg-red-50 text-red-600 rounded shadow hidden">Logout</button>
+				<button id="btnVR" class="px-3 py-2 bg-cyan-600 text-white rounded shadow">Enter VR</button>
+				<a href="/manifest.json" class="text-sm text-slate-600">Install</a>
+			</div>
+		</header>
+
+		<!-- Hero -->
+		<section class="hero glass p-8 rounded-lg mb-6 overflow-hidden">
+			<!-- decorative svg behind hero -->
+			<svg class="decor-svg absolute left-0 top-0 -z-10 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 400" aria-hidden="true">
+				<defs>
+					<linearGradient id="g1" x1="0" x2="1">
+						<stop offset="0%" stop-color="#06b6d4" stop-opacity="0.12"></stop>
+						<stop offset="100%" stop-color="#10b981" stop-opacity="0.08"></stop>
+					</linearGradient>
+				</defs>
+				<rect x="0" y="0" width="1200" height="400" fill="url(#g1)"></rect>
+				<g class="float-group" transform="translate(70,30)">
+					<circle cx="50" cy="60" r="36" fill="#34d399" opacity="0.12"></circle>
+					<circle cx="140" cy="30" r="22" fill="#06b6d4" opacity="0.10"></circle>
+					<ellipse cx="220" cy="100" rx="60" ry="24" fill="#10b981" opacity="0.06"></ellipse>
+				</g>
+				<g class="float-group" transform="translate(760,10)">
+					<circle cx="50" cy="60" r="44" fill="#059669" opacity="0.08"></circle>
+					<circle cx="150" cy="80" r="18" fill="#06b6d4" opacity="0.12"></circle>
+				</g>
+			</svg>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+				<div>
+					<h2 class="text-4xl font-extrabold mb-3">Make small changes, create big impact</h2>
+					<p class="text-lg text-slate-700 mb-4">EcoVerse Quest helps you track daily habits, join quests, and compete on the leaderboard. Earn badges and visualize your environment.</p>
+					<div class="flex gap-3">
+						<button id="heroCTA" class="btn btn-accent">Get Started</button>
+						<button class="btn btn-ghost" onclick="document.getElementById('questSearch').focus()">Explore Quests</button>
+					</div>
+				</div>
+				<div class="center">
+					<img src="/public/icons/logo.svg" alt="EcoVerse logo" class="w-40 h-40 rounded-lg shadow-lg" />
+				</div>
+			</div>
+		</section>
+
+		<main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+			<section class="lg:col-span-2 glass p-5 rounded-lg shadow">
+				<div class="flex items-center justify-between mb-4">
+					<div>
+						<h2 class="text-xl font-semibold">Your footprint</h2>
+						<p class="text-sm text-slate-600">Adjust daily habits and see your footprint change in real-time.</p>
+					</div>
+					<div class="text-right">
+						<div class="text-sm text-slate-500">Estimated CO₂ (kg/day)</div>
+						<div id="footprint" class="text-2xl font-bold text-emerald-700">—</div>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+					<div class="p-3 bg-white rounded">
+						<label class="text-sm text-slate-600">Travel</label>
+						<input id="travel" type="range" min="0" max="100" value="10" class="w-full" />
+						<div class="text-xs text-slate-500"><span id="travelVal">10</span> km</div>
+					</div>
+					<div class="p-3 bg-white rounded">
+						<label class="text-sm text-slate-600">Food</label>
+						<input id="food" type="range" min="0" max="10" value="3" class="w-full" />
+						<div class="text-xs text-slate-500"><span id="foodVal">3</span> servings</div>
+					</div>
+					<div class="p-3 bg-white rounded">
+						<label class="text-sm text-slate-600">Energy</label>
+						<input id="energy" type="range" min="0" max="50" value="8" class="w-full" />
+						<div class="text-xs text-slate-500"><span id="energyVal">8</span> kWh</div>
+					</div>
+				</div>
+
+				<div class="flex gap-3 mb-6">
+					<button id="ctaCalc" class="btn btn-accent">Calculate</button>
+					<button id="saveHabits" class="btn btn-ghost">Save Habits</button>
+					<div id="badges" class="ml-auto flex gap-2 items-center"></div>
+				</div>
+
+				<div class="h-72 rounded overflow-hidden shadow" aria-hidden="true">
+					<canvas id="vrCanvas" class="w-full h-full block"></canvas>
+				</div>
+			</section>
+
+			<aside class="glass p-5 rounded-lg shadow">
+				<h3 class="text-lg font-semibold mb-3">Active Quests</h3>
+				<div class="mb-2">
+					<input id="questSearch" placeholder="Search quests..." class="w-full px-3 py-2 rounded border text-sm" />
+				</div>
+				<div id="questList" class="space-y-3 mb-4 relative"></div>
+
+				<h3 class="text-lg font-semibold mb-3">Leaderboard</h3>
+				<div id="leaderboardList" class="space-y-2"></div>
+			</aside>
+		</main>
+
+		<footer class="mt-6 text-center text-sm text-slate-600">Made with ♻️ — try the WebXR demo on supported devices.</footer>
+	</div>
+	<div id="toast" class="fixed bottom-6 right-6 z-50"></div>
+
+	<!-- Auth modal -->
+	<div id="authModal" class="fixed inset-0 items-center justify-center bg-black/40 hidden z-50">
+		<div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+			<div class="flex items-center justify-between mb-3">
+				<h3 id="authTitle" class="text-lg font-semibold">Account</h3>
+				<button id="authClose" class="text-sm text-slate-500">Close</button>
+			</div>
+			<div class="flex gap-2 mb-4">
+				<button id="tabLogin" class="btn btn-ghost small flex-1">Sign in</button>
+				<button id="tabRegister" class="btn btn-ghost small flex-1">Register</button>
+			</div>
+
+			<div id="authForm" class="space-y-3">
+				<div>
+					<label class="text-sm text-slate-600">Username</label>
+					<input id="authUser" placeholder="username" class="w-full px-3 py-2 border rounded" />
+				</div>
+				<div>
+					<label class="text-sm text-slate-600">Password</label>
+					<input id="authPass" placeholder="password" type="password" class="w-full px-3 py-2 border rounded" />
+				</div>
+				<div id="authError" class="text-sm text-red-600 hidden"></div>
+			</div>
+
+			<div class="flex items-center justify-between mt-4">
+				<div class="text-xs text-slate-500">Your demo credentials remain local to this server.</div>
+				<div class="flex gap-2">
+					<button id="authRegister" class="px-3 py-2 bg-emerald-600 text-white rounded hidden">Register</button>
+					<button id="authLogin" class="px-3 py-2 bg-sky-600 text-white rounded">Sign in</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/public/js/app.js"></script>
+	<script>
+		if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
+	</script>
+</body>
+</html>

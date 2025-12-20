@@ -1,0 +1,110 @@
+/* EcoVerse custom styles */
+:root{--accent: #059669; --accent-2:#06b6d4; --muted:#475569; --glass-bg: rgba(255,255,255,0.78); --max-width:1120px}
+html,body{height:100%;margin:0;-webkit-font-smoothing:antialiased}
+body{background:linear-gradient(180deg,#f8fdff 0%, #eefaf3 100%);color:#0f172a}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 18px}
+/* Glass cards */
+.glass{background:linear-gradient(180deg,var(--glass-bg), rgba(255,255,255,0.6));backdrop-filter:blur(10px);box-shadow:0 12px 36px rgba(2,6,23,0.06);border-radius:14px}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
+.btn-accent{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:white;box-shadow:0 8px 20px rgba(16,185,129,0.12)}
+.btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--muted)}
+/* Badges */
+.badge-pill{padding:6px 10px;background:linear-gradient(90deg,#fff7ed,#fef3c7);border-radius:999px;color:#6b4226;font-weight:700;font-size:0.87rem}
+/* Avatars */
+.avatar{width:44px;height:44px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:white;font-weight:700;flex:0 0 44px}
+/* Leaderboard rows */
+.leader-row{transition:all 260ms cubic-bezier(.2,.9,.3,1);border-radius:10px}
+.leader-row:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(2,6,23,0.08)}
+/* Toast container & items */
+#toast{pointer-events:none}
+.toast-item{pointer-events:auto;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;margin-bottom:10px;box-shadow:0 14px 30px rgba(2,6,23,0.12)}
+/* Entrance animation helper */
+.card-enter{opacity:0;transform:translateY(10px)}
+.card-enter.show{opacity:1;transform:none;transition:all 420ms cubic-bezier(.2,.9,.3,1)}
+/* Quest progress bar */
+.progress-track{background:#f1f5f9;height:10px;border-radius:999px;overflow:hidden}
+.progress-fill{height:10px;background:linear-gradient(90deg,#34d399,#059669)}
+/* smooth progress animation */
+.progress-fill{transition:width 620ms cubic-bezier(.2,.9,.3,1)}
+/* Spark bar small */
+.spark{height:8px;background:linear-gradient(90deg,#34d399,#10b981);border-radius:999px}
+/* Footer */
+footer{opacity:0.9;color:var(--muted)}
+/* Small helpers */
+.center{display:flex;align-items:center;justify-content:center}
+.hidden{display:none !important}
+
+/* Hero */
+.hero{background:linear-gradient(135deg, rgba(6,182,212,0.06), rgba(5,150,105,0.06));padding:34px}
+.hero h2{background:linear-gradient(90deg,#064e3b,#059669);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.02}
+.hero p{color:var(--muted);font-size:1.05rem}
+
+/* Decorative SVG */
+.decor-svg{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;opacity:0.95;transform-origin:center}
+.float-group{transition:transform 320ms cubic-bezier(.2,.9,.3,1)}
+
+/* Range input styling */
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;background:transparent}
+input[type=range]::-webkit-slider-runnable-track{height:6px;background:#e6eef4;border-radius:999px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;margin-top:-8px;width:18px;height:18px;border-radius:50%;background:linear-gradient(90deg,var(--accent-2),var(--accent));box-shadow:0 6px 18px rgba(6,182,212,0.14);border:3px solid white}
+input[type=range]:focus{outline:none}
+
+/* subtle hover on quest cards */
+.quest-card{transition:transform 360ms cubic-bezier(.2,.9,.3,1), box-shadow 360ms}
+.quest-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 22px 48px rgba(2,6,23,0.09)}
+
+/* micro interactions for buttons */
+.btn{transition:transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(2,6,23,0.08)}
+
+/* Quest card */
+.quest-card{display:flex;gap:14px;align-items:center;padding:16px;border-radius:14px;background:white;border:1px solid rgba(2,6,23,0.04);box-shadow:0 10px 26px rgba(2,6,23,0.05)}
+.quest-icon{width:60px;height:60px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:white;font-weight:800}
+.quest-title{font-weight:800;font-size:1rem}
+.quest-desc{color:var(--muted);font-size:0.95rem}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn-accent{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:white;box-shadow:0 10px 30px rgba(6,182,212,0.08)}
+.btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--muted)}
+.btn.small{padding:6px 10px;font-weight:600;border-radius:8px}
+
+/* Modal for presenting user details */
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:white;border-radius:12px;box-shadow:0 24px 60px rgba(2,6,23,0.12);padding:20px;z-index:60}
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.4);z-index:50}
+
+/* Auth modal tweaks */
+.auth-hidden{display:none !important}
+#authModal{display:flex}
+#authModal.hidden{display:none}
+#authModal .modal{width:380px}
+#authModal input[type=text], #authModal input[type=password], #authModal input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06)}
+#authModal .btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.06)}
+#authError{color:#b91c1c;margin-top:4px}
+.btn-loading{position:relative;pointer-events:none;opacity:0.9}
+.btn-loading:after{content:'';position:absolute;right:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;border:2px solid rgba(255,255,255,0.6);border-left-color:transparent;border-radius:50%;animation:spin 900ms linear infinite}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
+
+/* small header logout button */
+#btnLogout{border:1px solid rgba(239,68,68,0.08)}
+
+
+/* small subtle header nav */
+.topbar{display:flex;align-items:center;gap:16px}
+.topbar .brand{display:flex;align-items:center;gap:12px}
+.brand h1{font-size:18px;margin:0}
+
+/* Confetti */
+.confetti{position:fixed;pointer-events:none;z-index:9999}
+
+/* Footer tweaks */
+footer{margin-top:18px}
+
+@media (max-width:768px){ .container{padding:12px} .avatar{width:36px;height:36px} .hero h2{font-size:1.6rem} }
+
+/* Confetti (small) */
+@keyframes confetti-fall{0%{transform:translateY(-10px) rotate(0)}100%{transform:translateY(120px) rotate(420deg)}}
+.confetti{width:8px;height:12px;position:absolute;opacity:0.95;border-radius:2px}
+
+/* Responsive tweaks */
+@media (max-width:768px){ .container{padding:12px} .avatar{width:36px;height:36px} }

@@ -1,0 +1,23 @@
+Server running on port 3000
+[0mPOST /auth/register [32m200[0m 322.724 ms - 269[0m
+[0mPOST /auth/login [32m200[0m 204.671 ms - 269[0m
+[0mPOST /api/leaderboard [32m200[0m 7.300 ms - 80[0m
+[0mGET /api/leaderboard [32m200[0m 2.772 ms - 78[0m
+[0mGET / [32m200[0m 95.805 ms - 8708[0m
+[0mGET /public/icons/logo.svg [36m304[0m 7.238 ms - -[0m
+[0mGET /public/css/styles.css [32m200[0m 16.408 ms - 6752[0m
+[0mGET /public/js/app.js [32m200[0m 14.375 ms - 22351[0m
+[0mGET /api/quests [36m304[0m 9.088 ms - -[0m
+[0mGET /api/leaderboard [32m200[0m 4.955 ms - 78[0m
+[0mGET /manifest.json [33m404[0m 71.953 ms - 152[0m
+[0mGET /favicon.ico [33m404[0m 72.532 ms - 150[0m
+[0mPOST /api/calc [32m200[0m 4.066 ms - 19[0m
+[0mPOST /api/calc [32m200[0m 3.556 ms - 19[0m
+[0mPOST /api/calc [32m200[0m 1.332 ms - 19[0m
+[0mGET / [36m304[0m 13.250 ms - -[0m
+[0mGET /public/css/styles.css [36m304[0m 1.878 ms - -[0m
+[0mGET /public/icons/logo.svg [36m304[0m 8.234 ms - -[0m
+[0mGET /public/js/app.js [36m304[0m 4.100 ms - -[0m
+[0mGET /api/quests [36m304[0m 1.821 ms - -[0m
+[0mGET /api/leaderboard [36m304[0m 2.109 ms - -[0m
+[0mGET /manifest.json [33m404[0m 7.499 ms - 152[0m
