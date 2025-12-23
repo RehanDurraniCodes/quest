@@ -1,0 +1,13 @@
+{
+  "name": "student-backend",
+  "version": "1.0.0",
+  "description": "Simple Node.js + Express + Mongoose student backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.3.4"
+  }
+}
